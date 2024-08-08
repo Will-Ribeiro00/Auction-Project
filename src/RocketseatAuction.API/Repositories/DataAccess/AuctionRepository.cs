@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using RocketseatAuction.API.Communication.Requests.Auction;
 using RocketseatAuction.API.Contracts;
 using RocketseatAuction.API.Entities;
 
@@ -16,6 +18,45 @@ public class AuctionRepository : IAuctionRepository
         return _dbContext
            .Auctions
            .Include(auction => auction.Items)
-           .FirstOrDefault(auction => today >= auction.Starts);
+           .Where(auction => auction.Starts <= today && auction.Ends >= today)
+           .FirstOrDefault();
+    }
+
+    public List<Auction> GetAll()
+    {
+        return [.. _dbContext.Auctions.OrderBy(a => a.Id)];
+    }
+
+    public void Create(Auction auction)
+    {
+        _dbContext.Auctions.Add(auction);
+
+        _dbContext.SaveChanges();
+    }
+
+    public Auction? Update(int id, RequestBodyAuctionJson request)
+    {
+        var auction = _dbContext.Auctions.FirstOrDefault(a => a.Id.Equals(id));
+
+        if (auction == null) return null;
+
+        auction.Name = request.Name;
+        auction.Starts = request.Start;
+        auction.Ends = request.End;
+
+        _dbContext.SaveChanges();
+
+        return auction;
+    }
+
+    public bool Delete(int id)
+    {
+        var auction = _dbContext.Auctions.FirstOrDefault(a => a.Id.Equals(id));
+
+        if (auction is null) return false;
+
+        _dbContext.Auctions.Remove(auction);
+        _dbContext.SaveChanges();
+        return true;
     }
 }

@@ -5,8 +5,21 @@ using RocketseatAuction.API.Filters;
 using RocketseatAuction.API.Repositories;
 using RocketseatAuction.API.Repositories.DataAccess;
 using RocketseatAuction.API.Services;
+using RocketseatAuction.API.UseCases.Auctions.Create;
+using RocketseatAuction.API.UseCases.Auctions.Delete;
+using RocketseatAuction.API.UseCases.Auctions.GetAll;
 using RocketseatAuction.API.UseCases.Auctions.GetCurrent;
+using RocketseatAuction.API.UseCases.Auctions.Update;
+using RocketseatAuction.API.UseCases.Items.Create;
+using RocketseatAuction.API.UseCases.Items.Delete;
+using RocketseatAuction.API.UseCases.Items.GetById;
+using RocketseatAuction.API.UseCases.Items.GetFromAnAuction;
+using RocketseatAuction.API.UseCases.Items.Update;
 using RocketseatAuction.API.UseCases.Offers.CreateOffer;
+using RocketseatAuction.API.UseCases.Users.Create;
+using RocketseatAuction.API.UseCases.Users.Delete;
+using RocketseatAuction.API.UseCases.Users.GetById;
+using RocketseatAuction.API.UseCases.Users.Update;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -44,13 +57,35 @@ builder.Services.AddSwaggerGen(options =>
     });
 });
 
-builder.Services.AddScoped<AuthenticationUserAttibute>();
-builder.Services.AddScoped<ILoggedUser, LoggedUser>();
-builder.Services.AddScoped<CreateOfferUseCase>();
-builder.Services.AddScoped<GetCurrentAuctionUseCase>();
 builder.Services.AddScoped<IAuctionRepository, AuctionRepository>();
 builder.Services.AddScoped<IOfferRepository, OfferRepository>();
 builder.Services.AddScoped<IUserRepository, UserRepository>();
+builder.Services.AddScoped<IItemRepository, ItemRepository>();
+
+builder.Services.AddScoped<AuthenticationUserAttibute>();
+builder.Services.AddScoped<ILoggedUser, LoggedUser>();
+
+builder.Services.AddScoped<CreateOfferUseCase>();
+
+builder.Services.AddScoped<CreateAuctionUseCase>();
+builder.Services.AddScoped<GetCurrentAuctionUseCase>();
+builder.Services.AddScoped<GetAllAuctionUseCase>();
+builder.Services.AddScoped<UpdateAuctionUseCase>();
+builder.Services.AddScoped<DeleteAuctionUseCase>();
+
+builder.Services.AddScoped<GetItemByIdUseCase>();
+builder.Services.AddScoped<GetItemsFromAnAuctionUseCase>();
+builder.Services.AddScoped<CreateItemUseCase>();
+builder.Services.AddScoped<UpdateItemUseCase>();
+builder.Services.AddScoped<DeleteItemUseCase>();
+
+builder.Services.AddScoped<GetUserById>();
+builder.Services.AddScoped<GetAllUsersUseCase>();
+builder.Services.AddScoped<CreateUserUseCase>();
+builder.Services.AddScoped<UpdateUserUseCase>();
+builder.Services.AddScoped<DeleteUserUseCase>();
+
+
 
 
 builder.Services.AddDbContext<RocketseatAuctionDbContext>(options =>

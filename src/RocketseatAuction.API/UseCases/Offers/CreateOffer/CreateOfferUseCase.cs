@@ -1,4 +1,4 @@
-﻿using RocketseatAuction.API.Communication.Requests;
+﻿using RocketseatAuction.API.Communication.Requests.Offer;
 using RocketseatAuction.API.Contracts;
 using RocketseatAuction.API.Entities;
 using RocketseatAuction.API.Services;

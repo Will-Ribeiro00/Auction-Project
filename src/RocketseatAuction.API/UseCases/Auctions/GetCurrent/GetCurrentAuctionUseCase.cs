@@ -1,7 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
-using RocketseatAuction.API.Contracts;
+﻿using RocketseatAuction.API.Contracts;
 using RocketseatAuction.API.Entities;
-using RocketseatAuction.API.Repositories;
 
 namespace RocketseatAuction.API.UseCases.Auctions.GetCurrent;
 

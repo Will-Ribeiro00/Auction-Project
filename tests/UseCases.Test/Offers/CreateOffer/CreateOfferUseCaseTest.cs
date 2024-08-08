@@ -1,11 +1,10 @@
 ﻿using Bogus;
 using FluentAssertions;
 using Moq;
-using RocketseatAuction.API.Communication.Requests;
+using RocketseatAuction.API.Communication.Requests.Offer;
 using RocketseatAuction.API.Contracts;
 using RocketseatAuction.API.Entities;
 using RocketseatAuction.API.Services;
-using RocketseatAuction.API.UseCases.Auctions.GetCurrent;
 using RocketseatAuction.API.UseCases.Offers.CreateOffer;
 using Xunit;
 
